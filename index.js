@@ -24,38 +24,38 @@ function displayContent() {
     }
 }
 
-// function refreshPage() {
-//         window.location.reload();
-// }
+function refreshPage() {
+        window.location.reload();
+}
 
-// window.onscroll = function() { scrollFunction(); };
+window.onscroll = function() { scrollFunction(); };
 
-// function scrollFunction() {
-//     const header = document.querySelector(".header");
-//     if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
-//         header.classList.add("header-visible");
-//         header.style.backgroundColor = "#fff";
-//         header.style.boxShadow = "0 2px 4px rgba(107, 107, 107, 0.1)";
-//     } else {
-//         header.classList.remove("header-visible");
-//         header.style.backgroundColor = "transparent";
-//         header.style.boxShadow = "none";
-//     }
-// }
+function scrollFunction() {
+    const header = document.querySelector(".header");
+    if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+        header.classList.add("header-visible");
+        header.style.backgroundColor = "#fff";
+        header.style.boxShadow = "0 2px 4px rgba(107, 107, 107, 0.1)";
+    } else {
+        header.classList.remove("header-visible");
+        header.style.backgroundColor = "transparent";
+        header.style.boxShadow = "none";
+    }
+}
 
-// document.addEventListener("DOMContentLoaded", function() {
-//     document.querySelector(".header").classList.remove("header-visible");
-// });
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector(".header").classList.remove("header-visible");
+});
 
-// document.querySelector(".header").addEventListener("scroll", function(){
-//         const header = document.querySelector(".header");
-//     if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
-//         header.classList.add("header-visible");
-//         header.style.backgroundColor = "#fff";
-//         header.style.boxShadow = "0 2px 4px rgba(107, 107, 107, 0.1)";
-//     } else {
-//         header.classList.remove("header-visible");
-//         header.style.backgroundColor = "transparent";
-//         header.style.boxShadow = "none";
-//     }
-// })
+document.querySelector(".header").addEventListener("scroll", function(){
+        const header = document.querySelector(".header");
+    if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
+        header.classList.add("header-visible");
+        header.style.backgroundColor = "#fff";
+        header.style.boxShadow = "0 2px 4px rgba(107, 107, 107, 0.1)";
+    } else {
+        header.classList.remove("header-visible");
+        header.style.backgroundColor = "transparent";
+        header.style.boxShadow = "none";
+    }
+})
