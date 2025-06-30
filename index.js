@@ -1,19 +1,3 @@
-// const products = fetch('https://fakestoreapi.com/products/')
-//     .then(res=>res.json())
-//     .then(data=>{
-//         const productContainer = document.querySelector(".section_five");
-//         data.map(product => {
-//             console.log(product);
-//             return productContainer.innerHTML += `
-//                 <div class="section_five_items">
-//                     <div class="images">
-//                         <img src="${product.image}" alt="Product Image">
-//                     </div>
-//                 </div>`
-//         });
-//     })
-
-
 function displayContent() {
     const content = document.querySelector(".dropdown_content") 
     
