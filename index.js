@@ -43,3 +43,15 @@ document.querySelector(".header").addEventListener("scroll", function(){
         header.style.boxShadow = "none";
     }
 })
+
+let cursor = document.querySelector('.cursor');
+
+document.addEventListener('mousemove', e => {
+    cursor.setAttribute("style", "top: " +(e.pageY - 5)+"px; left: " +(e.pageX - 5)+"px;");
+});
+
+let cursorTwo = document.querySelector('.cursor-two');
+
+document.addEventListener('mousemove', e => {
+    cursorTwo.setAttribute("style", "top: " +(e.pageY - 16)+"px; left: " +(e.pageX - 16)+"px;");
+}); 
