@@ -45,13 +45,23 @@ document.querySelector(".header").addEventListener("scroll", function(){
 })
 
 let cursor = document.querySelector('.cursor');
+let cursorTwo = document.querySelector('.cursor-two');
+let mouseX = 0;
+let mouseY = 0;
 
 document.addEventListener('mousemove', e => {
-    cursor.setAttribute("style", "top: " +(e.pageY - 5)+"px; left: " +(e.pageX - 5)+"px;");
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    updateCursor();
 });
 
-let cursorTwo = document.querySelector('.cursor-two');
+window.addEventListener('scroll', updateCursor);
 
-document.addEventListener('mousemove', e => {
-    cursorTwo.setAttribute("style", "top: " +(e.pageY - 16)+"px; left: " +(e.pageX - 16)+"px;");
-}); 
+function updateCursor() {
+    const scrollX = window.scrollX || window.pageXOffset;
+    const scrollY = window.scrollY || window.pageYOffset;
+    cursor.style.top = (mouseY + scrollY - 5) + "px";
+    cursor.style.left = (mouseX + scrollX - 5) + "px";
+    cursorTwo.style.top = (mouseY + scrollY - 16) + "px";
+    cursorTwo.style.left = (mouseX + scrollX - 16) + "px";
+}
