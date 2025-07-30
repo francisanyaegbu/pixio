@@ -8,13 +8,13 @@ function refreshPage() {
 
 
 
-  window.addEventListener("scroll", () => {
+// =================== HEADER ANIMATION ON SCROLL ===================
+// Animates the header when the user scrolls down and resets when scrolling up
+window.addEventListener("scroll", () => {
     if (!hasAnimated && window.scrollY > 10) {
       hasAnimated = true;
-
       // Trigger the "slide up and in" effect
       header.classList.add("animate-in");
-
       // After a short delay, slide it back down
       setTimeout(() => {
         header.classList.add("slide-back");
@@ -24,16 +24,17 @@ function refreshPage() {
         hasAnimated = false;
         header.classList.remove("animate-in", "slide-back");
     }
-  });
+});
 
 
-
-
-
+// =================== REMOVE HEADER VISIBLE CLASS ON LOAD ===================
+// Ensures header does not have the 'header-visible' class on page load
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelector(".header").classList.remove("header-visible");
 });
 
+// =================== HEADER STYLE ON SCROLL ===================
+// Changes header background and shadow based on scroll position
 document.querySelector(".header").addEventListener("scroll", function(){
         const header = document.querySelector(".header");
     if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
@@ -48,30 +49,55 @@ document.querySelector(".header").addEventListener("scroll", function(){
 })
 
 
-
+// =================== HEADER DROPDOWN HOVER LOGIC ===================
+// Allows dropdown content to stay visible while hovering over trigger or content
 document.addEventListener("DOMContentLoaded", function() {
     const dropdowns = document.querySelectorAll('.dropdown');
 
     dropdowns.forEach(dropdown => {
-        const content = dropdown.querySelector('.dropdown_content, .home-content, .shop-content, .blog-content, .post_content, .portfolio_content, .pages_content, .account_content');
+        // Find the first content element inside the dropdown
+        const content = dropdown.querySelector(
+            '.dropdown_content, .home-content, .shop-content, .blog-content, .post_content, .portfolio_content, .pages_content, .account_content'
+        );
         if (!content) return;
 
-        dropdown.addEventListener('mouseenter', () => {
+        let isOverDropdown = false;
+        let isOverContent = false;
+
+        function showContent() {
             content.style.display = 'block';
-            // Access the content here
-            console.log('Hovered dropdown content:', content.innerHTML);
-            // You can also manipulate content, e.g.:
-            // content.style.backgroundColor = "#f0f0f0";
+        }
+        function hideContent() {
+            content.style.display = 'none';
+        }
+
+        dropdown.addEventListener('mouseenter', () => {
+            isOverDropdown = true;
+            showContent();
+        });
+        dropdown.addEventListener('mouseleave', () => {
+            isOverDropdown = false;
+            setTimeout(() => {
+                if (!isOverContent) hideContent();
+            }, 50);
         });
 
-        dropdown.addEventListener('mouseleave', () => {
-            content.style.display = 'none';
+        content.addEventListener('mouseenter', () => {
+            isOverContent = true;
+            showContent();
+        });
+        content.addEventListener('mouseleave', () => {
+            isOverContent = false;
+            setTimeout(() => {
+                if (!isOverDropdown) hideContent();
+            }, 50);
         });
     });
-});
+});22;
 
 
-
+// =================== CUSTOM CURSOR LOGIC ===================
+// Handles custom cursor movement and pointer effect on hoverable elements
 let cursor = document.querySelector('.cursor');
 let cursorTwo = document.querySelector('.cursor-two');
 let mouseX = 0;
@@ -94,6 +120,7 @@ function updateCursor() {
     cursorTwo.style.left = (mouseX + scrollX - 16) + "px";
 }
 
+// Adds pointer effect to cursor when hovering over interactive elements
 function setCursorPointerEvents() {
     const hoverables = document.querySelectorAll('button, a, .dropdown, .dropdown_content, .home-content');
     hoverables.forEach(el => {
@@ -113,7 +140,8 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-
+// =================== SEARCH OVERLAY LOGIC ===================
+// Handles opening and closing of the search overlay
 document.addEventListener("DOMContentLoaded", function() {
     const searchBtn = document.getElementById('search-btn');
     const searchDisplay = document.querySelector('.search-display');
@@ -143,6 +171,8 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
+// =================== SEARCH CANCEL BUTTON LOGIC ===================
+// Handles closing of search overlay via cancel button
 document.addEventListener("DOMContentLoaded", function() {
     const searchCancel = document.getElementById('search-cancel');
     const searchDisplay = document.querySelector('.search-display');
@@ -157,7 +187,8 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-
+// =================== SIDEBAR OVERLAY LOGIC ===================
+// Handles opening and closing of the sidebar overlay
 document.addEventListener("DOMContentLoaded", function() {
     const sidebarBtn = document.querySelector('.sidebar');
     const sidebarDisplay = document.querySelector('.sidebar-display');
@@ -191,6 +222,8 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
+// =================== WISHLIST & CART OVERLAY LOGIC ===================
+// Handles showing and hiding of wishlist and cart overlays
 document.addEventListener("DOMContentLoaded", function() {
     const wishlistBtn = document.querySelector('.wishlist');
     const cartBtn = document.querySelector('.cart');
@@ -216,26 +249,12 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Close on overlay click
-    // if (wishcartOverlay) {
-    //     wishcartOverlay.addEventListener('click', function(e) {
-    //         if (e.target === wishcartOverlay) {
-    //             wishcartOverlay.classList.remove('active');
-    //             wishcartDisplay.classList.remove('active');
-    //         }
-    //     });
-    // }
-
-    // Close on ESC key
-    // document.addEventListener('keydown', function(e) {
-    //     if (e.key === "Escape") {
-    //         wishcartOverlay.classList.remove('active');
-    //         wishcartDisplay.classList.remove('active');
-    //     }
-    // });
+    // (Optional) Overlay click and ESC key close logic can be added here
 });
 
 
+// =================== SUGGESTION IMAGES SLIDER ===================
+// Handles the sliding animation for the suggestion images slider
 document.addEventListener("DOMContentLoaded", function() {
     const track = document.querySelector('.suggestion-images-track');
     const images = Array.from(track.children);
@@ -266,35 +285,28 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-// Set the date we're counting down to
+// =================== COUNTDOWN TIMER LOGIC ===================
+// Handles the countdown timer for the shop content
 var countDownDate = new Date("Aug 8, 2025 11:17:25").getTime();
 
-// Update the count down every 1 second
 var x = setInterval(function() {
-
-  // Get today's date and time
   var now = new Date().getTime();
-    
-  // Find the distance between now and the count down date
   var distance = countDownDate - now;
-    
-  // Time calculations for days, hours, minutes and seconds
   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    
-  // Output the result in an element with id="demo"
   document.getElementById("countdown").innerHTML = days + " " + hours + " "
   + minutes + " " + seconds ;
-    
-  // If the count down is over, write some text 
   if (distance < 0) {
     clearInterval(x);
     document.getElementById("countdown").innerHTML = "EXPIRED";
   }
 }, 1000);
 
+
+// =================== SECTION NINE CAROUSEL SLIDER ===================
+// Handles the sliding and fade-out effect for section nine image carousel
 document.addEventListener("DOMContentLoaded", function() {
     const track = document.querySelector('.section_nine .image-track');
     if (!track) return;
@@ -362,6 +374,8 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
+// =================== SECTION ELEVEN CAROUSEL SLIDER ===================
+// Handles the sliding and fade-out effect for section eleven image carousel
 document.addEventListener("DOMContentLoaded", function() {
     const track = document.querySelector('.section_eleven .image-track');
     if (!track) return;
@@ -429,12 +443,8 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-
-
-
-
-//cart rendering and management
-
+// =================== CART RENDERING AND MANAGEMENT ===================
+// Handles rendering and removal of items in the shopping cart
 let cartItems = [
     {
         img: "/images/bgpurp.png",
@@ -486,9 +496,8 @@ function renderCartItems() {
 document.addEventListener("DOMContentLoaded", renderCartItems);
 
 
-
-// Wishlist rendering and management
-// Example wishlist array
+// =================== WISHLIST RENDERING AND MANAGEMENT ===================
+// Handles rendering and removal of items in the wishlist
 let wishlistItems = [
     {
         img: "/images/bgpurp.png",
@@ -535,9 +544,8 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-
-
-
+// =================== WISHLIST & CART OVERLAY TOGGLE LOGIC ===================
+// Handles toggling between wishlist and cart in the overlay
 document.addEventListener("DOMContentLoaded", function() {
     const wishlistBtn = document.querySelector('.wishlist'); // SVG icon
     const wishlistButton = document.querySelector('.wishlist-button'); // Button in overlay
@@ -582,17 +590,13 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-
-
-
-
+// =================== SLIDE-IN PANEL FOR PRODUCT DETAILS ===================
+// Handles the slide-in panel that shows product details and allows adding to cart
 cartItems = []; // Your shopping cart array
 
 document.addEventListener("DOMContentLoaded", function() {
-    // ...existing code...
-
     // Store current item info when an image is clicked
-    let currentItem = null;
+let currentItem = null;
 
     const clickableImages = document.querySelectorAll(
         ".image-container img, .container img, .suggestion-image-item img"
@@ -601,14 +605,14 @@ document.addEventListener("DOMContentLoaded", function() {
     const content = document.querySelector('.item-slide-content');
     const closeBtn = document.querySelector('.item-slide-close');
     const addCartBtn = document.querySelector('.item-slide-addcart');
+    const addWishlistBtn = document.querySelector('.item-slide-addwishlist');
 
     clickableImages.forEach(img => {
         img.style.cursor = "pointer";
         img.addEventListener("click", function() {
-            let parent = img.closest('.image-container, .container, .suggestion-image-item');
+            let parent = img.closest('.image-container, .suggestion-image-item');
             let name = "";
             let price = "";
-            let oldPrice = "";
             let desc = "";
 
             if (parent.querySelector('.product-name')) {
@@ -629,10 +633,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 price = parent.querySelector('span').textContent;
             }
 
-            if (parent.querySelector('s')) {
-                oldPrice = parent.querySelector('s').textContent;
-            }
-
             if (parent.querySelector('.discount')) {
                 desc = parent.querySelector('.discount').textContent;
             } else if (parent.querySelector('.product-delivery')) {
@@ -641,12 +641,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 desc = parent.querySelector('.overlay-text p').textContent;
             }
 
-            // Save current item info for add to cart
+            // Save current item info for add to cart/wishlist
             currentItem = {
                 img: img.src,
                 name: name || "Product",
                 price: price || "",
-                oldPrice: oldPrice || "",
                 desc: desc || ""
             };
 
@@ -654,7 +653,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <img src="${currentItem.img}" alt="${currentItem.name}">
                 <h2>${currentItem.name}</h2>
                 <p>${currentItem.desc}</p>
-                <p style="font-size:1.2em;font-weight:600;">${currentItem.price} ${currentItem.oldPrice ? `<s style="color:#888;font-size:0.9em;">${currentItem.oldPrice}</s>` : ""}</p>
+                <p style="font-size:1.2em;font-weight:600;">${currentItem.price}</p>
             `;
 
             overlay.classList.add('active');
@@ -671,56 +670,37 @@ document.addEventListener("DOMContentLoaded", function() {
     // Add to cart logic
     addCartBtn.addEventListener("click", function() {
         if (currentItem) {
-        cartItems.push(currentItem);
-        saveCartToStorage();
-        renderCart();
-        overlay.classList.remove('active');
-        showSuccessMessage("Item has been added to cart");
+            cartItems.push({...currentItem, qty: 1});
+            saveCartToStorage();
+            renderCart();
+            overlay.classList.remove('active');
+            showSuccessMessage("Item has been added to cart");
         }
     });
 
-    // Example cart rendering function
-    function renderCart() {
-        const cartContainer = document.querySelector(".cart-items-container");
-        if (cartContainer) {
-            cartContainer.innerHTML = cartItems.map((item, idx) => `
-                <div class="cart-item" data-index="${idx}">
-                    <img src="${item.img}" alt="${item.name}">
-                    <div class="cart-item-details">
-                        <div class="cart-item-name"><p>${item.name}</p></div>
-                        <div class="cart-item-price"><span>${item.price}</span></div>
-                    </div>
-                    <div class="cart-item-remove" style="cursor:pointer;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M19 6L5 20M5 6L19 20" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                    </div>
-                </div>
-            `).join('');
-            // Remove logic for cart items
-            cartContainer.querySelectorAll('.cart-item-remove').forEach((removeBtn, i) => {
-                removeBtn.onclick = function() {
-                    if (confirm("Do you want to remove this item from cart?")) {
-                    cartItems.splice(i, 1);
-                    saveCartToStorage();
-                    renderCart();
-                    }
-                };
-            });
+    // Add to wishlist logic
+    addWishlistBtn.addEventListener("click", function() {
+        if (currentItem) {
+            // Prevent duplicates in wishlist
+            const exists = wishlistItems.some(item => item.name === currentItem.name && item.price === currentItem.price);
+            if (!exists) {
+                wishlistItems.push(currentItem);
+                saveWishlistToStorage();
+                renderWishlist();
+                showSuccessMessage("Item has been added to wishlist");
+            } else {
+                showSuccessMessage("Item is already in wishlist");
+            }
+            overlay.classList.remove('active');
         }
-    }
+    });
 });
 
 
-
-
-
-
-
+// =================== LOCAL STORAGE MANAGEMENT ===================
+// Functions to save and load cart and wishlist data from localStorage
 cartItems = loadCartFromStorage();
 wishlistItems = loadWishlistFromStorage();
-
-
 
 function saveCartToStorage() {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
@@ -755,6 +735,9 @@ wishlistItems.splice(i, 1);
 saveWishlistToStorage();
 renderWishlist();
 
+
+// =================== INITIALIZE CART & WISHLIST FROM STORAGE ON LOAD ===================
+// Loads cart and wishlist from localStorage and renders them on page load
 document.addEventListener("DOMContentLoaded", function() {
     cartItems = loadCartFromStorage();
     wishlistItems = loadWishlistFromStorage();
@@ -763,8 +746,8 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-
-// Success message function
+// =================== SUCCESS MESSAGE FUNCTION ===================
+// Shows a temporary success message (e.g., after adding to cart)
 function showSuccessMessage(message) {
     let msgDiv = document.createElement('div');
     msgDiv.textContent = message;
@@ -783,3 +766,223 @@ function showSuccessMessage(message) {
         msgDiv.remove();
     }, 1500);
 }
+
+// Replace the default confirm with a custom styled prompt for deleting cart items
+function showDeletePrompt(message, onConfirm, onCancel) {
+    // Remove any existing prompt
+    const oldPrompt = document.getElementById('custom-delete-prompt');
+    if (oldPrompt) oldPrompt.remove();
+
+    // Create overlay
+    const overlay = document.createElement('div');
+    overlay.id = 'custom-delete-prompt';
+    overlay.style.position = 'fixed';
+    overlay.style.top = 0;
+    overlay.style.left = 0;
+    overlay.style.width = '100vw';
+    overlay.style.height = '100vh';
+    overlay.style.background = 'rgba(0,0,0,0.25)';
+    overlay.style.display = 'flex';
+    overlay.style.alignItems = 'center';
+    overlay.style.justifyContent = 'center';
+    overlay.style.zIndex = 5000;
+
+    // Create prompt box
+    const box = document.createElement('div');
+    box.style.background = '#fff';
+    box.style.padding = '32px 28px 24px 28px';
+    box.style.borderRadius = '14px';
+    box.style.boxShadow = '0 8px 32px rgba(0,0,0,0.18)';
+    box.style.textAlign = 'center';
+    box.style.minWidth = '320px';
+    box.style.maxWidth = '90vw';
+
+    // Message
+    const msg = document.createElement('div');
+    msg.textContent = message;
+    msg.style.fontSize = '1.13em';
+    msg.style.marginBottom = '24px';
+    msg.style.color = '#222';
+
+    // Buttons
+    const btns = document.createElement('div');
+    btns.style.display = 'flex';
+    btns.style.justifyContent = 'center';
+    btns.style.gap = '18px';
+
+    const yesBtn = document.createElement('button');
+    yesBtn.textContent = 'Yes, Remove';
+    yesBtn.style.background = '#e53935';
+    yesBtn.style.color = '#fff';
+    yesBtn.style.border = 'none';
+    yesBtn.style.padding = '10px 22px';
+    yesBtn.style.borderRadius = '7px';
+    yesBtn.style.fontWeight = '600';
+    yesBtn.style.cursor = 'pointer';
+    yesBtn.style.fontSize = '1em';
+
+    const noBtn = document.createElement('button');
+    noBtn.textContent = 'Cancel';
+    noBtn.style.background = '#eee';
+    noBtn.style.color = '#222';
+    noBtn.style.border = 'none';
+    noBtn.style.padding = '10px 22px';
+    noBtn.style.borderRadius = '7px';
+    noBtn.style.fontWeight = '600';
+    noBtn.style.cursor = 'pointer';
+    noBtn.style.fontSize = '1em';
+
+    btns.appendChild(yesBtn);
+    btns.appendChild(noBtn);
+
+    box.appendChild(msg);
+    box.appendChild(btns);
+    overlay.appendChild(box);
+    document.body.appendChild(overlay);
+
+    yesBtn.onclick = () => {
+        overlay.remove();
+        if (onConfirm) onConfirm();
+    };
+    noBtn.onclick = () => {
+        overlay.remove();
+        if (onCancel) onCancel();
+    };
+}
+
+
+
+
+
+
+
+// ...existing code...
+
+// Ensure each cart item has a qty property (default to 1 if not present)
+function ensureCartQty() {
+    cartItems.forEach(item => {
+        if (typeof item.qty !== "number" || item.qty < 1) item.qty = 1;
+    });
+}
+
+// Update subtotal
+function updateSubtotal() {
+    const sumtotal = document.querySelector('.sumtotal');
+    if (!sumtotal) return;
+    let total = 0;
+    cartItems.forEach(item => {
+        // Remove $ and parse as float
+        let price = parseFloat((item.price || "0").replace(/[^0-9.]/g, ""));
+        total += price * (item.qty || 1);
+    });
+    sumtotal.textContent = "$" + total.toFixed(2);
+}
+
+// Render cart items with counter
+function renderCart() {
+    ensureCartQty();
+    const cartContainer = document.querySelector(".cart-items-container");
+    if (cartContainer) {
+        cartContainer.innerHTML = cartItems.map((item, idx) => `
+            <div class="cart-item" data-index="${idx}">
+                <img src="${item.img}" alt="${item.name}">
+                <div class="cart-item-details">
+                    <div class="cart-item-name"><p>${item.name}</p></div>
+                    <div class="cart-item-qty">
+                        <button class="cart-item-qty-btn" data-action="decrement" data-index="${idx}">-</button>
+                        <span class="cart-item-qty-value">${item.qty}</span>
+                        <button class="cart-item-qty-btn" data-action="increment" data-index="${idx}">+</button>
+                    </div>
+                    <div class="cart-item-price"><span>${item.price}</span></div>
+                </div>
+                <div class="cart-item-remove" style="cursor:pointer;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M19 6L5 20M5 6L19 20" stroke="#000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </div>
+            </div>
+        `).join('');
+        // Remove logic
+        cartContainer.querySelectorAll('.cart-item-remove').forEach((removeBtn, i) => {
+            removeBtn.onclick = function() {
+                showDeletePrompt(
+                    "Do you want to remove this item from cart?",
+                    function() {
+                        cartItems.splice(i, 1);
+                        saveCartToStorage();
+                        renderCart();
+                        updateSubtotal();
+                    }
+                );
+            };
+        });
+        // Counter logic
+        cartContainer.querySelectorAll('.cart-item-qty-btn').forEach(btn => {
+            btn.onclick = function() {
+                const idx = parseInt(btn.getAttribute('data-index'));
+                if (btn.getAttribute('data-action') === 'increment') {
+                    cartItems[idx].qty += 1;
+                } else if (btn.getAttribute('data-action') === 'decrement') {
+                    if (cartItems[idx].qty > 1) {
+                        cartItems[idx].qty -= 1;
+                    }
+                }
+                saveCartToStorage();
+                renderCart();
+                updateSubtotal();
+            };
+        });
+    }
+    updateSubtotal();
+}
+
+// When adding to cart, set qty to 1 if not present
+function addToCart(item) {
+    if (typeof item.qty !== "number" || item.qty < 1) item.qty = 1;
+    cartItems.push(item);
+    saveCartToStorage();
+    renderCart();
+    updateSubtotal();
+}
+
+// On page load, ensure qty and subtotal are correct
+document.addEventListener("DOMContentLoaded", function() {
+    ensureCartQty();
+    renderCart();
+    updateSubtotal();
+});
+
+
+
+// =================== API PRODUCTS FETCH AND DISPLAY ===================
+// Example: Display products from the API in a container with id="api-products"
+document.addEventListener("DOMContentLoaded", function() {
+    const productsContainer = document.getElementById("api-products");
+    if (!productsContainer) return;
+
+    fetch("https://fakestoreapi.com/products")
+        .then(res => res.json())
+        .then(products => {
+            productsContainer.innerHTML = products.map(product => `
+                <div class="api-product-card">
+                    <img src="${product.image}" alt="${product.title}" style="width:120px;height:120px;object-fit:contain;">
+                    <h3 style="font-size:1.1em;">${product.title}</h3>
+                    <p style="font-weight:600;">$${product.price}</p>
+                    <p style="font-size:0.95em;color:#666;">${product.category}</p>
+                    <button class="api-add-cart-btn" data-id="${product.id}">Add to Cart</button>
+                </div>
+            `).join("");
+        });
+});
+
+
+
+// Make the "View All Products" button open the API in a new tab
+document.addEventListener("DOMContentLoaded", function() {
+    const viewAllBtn = document.getElementById("api-products");
+    if (viewAllBtn) {
+        viewAllBtn.addEventListener("click", function() {
+            window.open("https://fakestoreapi.com/products", "_blank");
+        });
+    }
+});

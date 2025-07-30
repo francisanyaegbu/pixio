@@ -31,6 +31,10 @@
     <div class="cursor" onmouseover=""></div>
     <div class="cursor-two"></div>
     <div class="header">
+        <!-- Add this button where you want the "View All Products" button to appear -->
+<!-- <button id="api-products" type="button" style="margin: 30px auto 0 auto; display: block; background: #000; color: #fff; padding: 14px 35px; font-size: 15px; font-weight: 500; font-family: lufga; border-radius: 10px; border: none; cursor: pointer;">
+    View All Products
+</button> -->
         <div class="header_logo" onclick="refreshPage()">
             <img src="/images/favicon.svg" alt="">
         </div>
@@ -580,11 +584,15 @@
         <div class="sidebar-overlay">
             <div class="sidebar-display">
                 <button class="sidebar-cancel" id="sidebar-cancel" aria-label="Close Sidebar">&times;</button>
-                <div>
+                <div class="search-product">
                     <input type="search" placeholder="Search Product">
                 </div>
-
-                <h1>COMING SOON!!!</h1>
+                <div class="price-selector"></div>
+                <div class="color-selector"></div>
+                <div class="size-selector"></div>
+                <div class="product-category"></div>
+                <div class="filter-product"></div>
+                <button type="reset">RESET</button>
             </div>
         </div>
         
@@ -609,6 +617,11 @@
 
                                 <span></span>
                             </div>
+                        </div>
+                        <div class="cart-item-qty">
+                                <button class="cart-item-qty-btn" data-action="decrement">-</button>
+                                <span class="cart-item-qty-value">1</span>
+                                <button class="cart-item-qty-btn" data-action="increment">+</button>
                         </div>
                     </div>
                     <div class="total">
@@ -846,8 +859,8 @@
                             <p>GET 20% OFF</p>
                         </div>
                         <div class="overlay-icons">
-                            <i class="ph-bold ph-heart"></i>
-                            <i class="ph-bold ph-basket"></i>
+                            <i class="ph ph-heart-straight"></i>
+                            <i class="ph ph-basket"></i>
                         </div>
                         <div class="image-button">
                             <button type="button">QUICK VIEW</button>
@@ -863,8 +876,11 @@
                             <p>GET 20% OFF</p>
                         </div>
                         <div class="overlay-icons">
-                            <i class="ph-bold ph-heart"></i>
-                            <i class="ph-bold ph-basket"></i>
+                            <i class="ph ph-heart-straight"></i>
+                            <i class="ph ph-basket"></i>
+                        </div>
+                        <div class="image-button">
+                            <button type="button">QUICK VIEW</button>
                         </div>
                         <div class="description">
                             <span>Sophisticated <br> Swagger Suit</span>
@@ -877,8 +893,11 @@
                             <p>GET 20% OFF</p>
                         </div>
                         <div class="overlay-icons">
-                            <i class="ph-bold ph-heart"></i>
-                            <i class="ph-bold ph-basket"></i>
+                            <i class="ph ph-heart-straight"></i>
+                            <i class="ph ph-basket"></i>
+                        </div>
+                        <div class="image-button">
+                            <button type="button">QUICK VIEW</button>
                         </div>
                         <div class="description">
                             <span>Classic Denim Skinny Jeans</span>
@@ -891,8 +910,11 @@
                             <p>GET 20% OFF</p>
                         </div>
                         <div class="overlay-icons">
-                            <i class="ph-bold ph-heart"></i>
-                            <i class="ph-bold ph-basket"></i>
+                            <i class="ph ph-heart-straight"></i>
+                            <i class="ph ph-basket"></i>
+                        </div>
+                        <div class="image-button">
+                            <button type="button">QUICK VIEW</button>
                         </div>
                         <div class="description">
                             <span>Athletic Mesh Sports Leggings</span>
@@ -905,8 +927,11 @@
                             <p>GET 20% OFF</p>
                         </div>
                         <div class="overlay-icons">
-                            <i class="ph-bold ph-heart"></i>
-                            <i class="ph-bold ph-basket"></i>
+                            <i class="ph ph-heart-straight"></i>
+                            <i class="ph ph-basket"></i>
+                        </div>
+                        <div class="image-button">
+                            <button type="button">QUICK VIEW</button>
                         </div>
                         <div class="description">
                             <span>Vintage Denim <br> Overall Shorts</span>
@@ -919,8 +944,11 @@
                             <p>GET 20% OFF</p>
                         </div>
                         <div class="overlay-icons">
-                            <i class="icofont-heart"></i>
-                            <i class="icofont-basket"></i>
+                            <i class="ph ph-heart-straight"></i>
+                            <i class="ph ph-basket"></i>
+                        </div>
+                        <div class="image-button">
+                            <button type="button">QUICK VIEW</button>
                         </div>
                         <div class="description">
                             <span>Satin Wrap Party <br> Blouse</span>
@@ -933,8 +961,11 @@
                             <p>GET 20% OFF</p>
                         </div>
                         <div class="overlay-icons">
-                            <i class="ph-bold ph-heart"></i>
-                            <i class="ph-bold ph-basket"></i>
+                            <i class="ph ph-heart-straight"></i>
+                            <i class="ph ph-basket"></i>
+                        </div>
+                        <div class="image-button">
+                            <button type="button">QUICK VIEW</button>
                         </div>
                         <div class="description">
                             <span>Plaid Cool Winter <br> Coat</span>
@@ -947,8 +978,11 @@
                             <p>GET 20% OFF</p>
                         </div>
                         <div class="overlay-icons">
-                            <i class="ph-bold ph-heart"></i>
-                            <i class="ph-bold ph-basket"></i>
+                            <i class="ph ph-heart-straight"></i>
+                            <i class="ph ph-basket"></i>
+                        </div>
+                        <div class="image-button">
+                            <button type="button">QUICK VIEW</button>
                         </div>
                         <div class="description">
                             <span>Water-Resistant Windbreaker Jacket</span>
@@ -1280,10 +1314,89 @@
 
 
 
-
-
             <!-- SECTION TWELVE STARTS HERE -->
+
+
+
+
             <div class="section_twelve">
+                <div class="left">
+                <div class="container">
+                    <img src="/images/gripskirt2.png" alt="">
+                    <div class="overlay-text">
+                        <h1>Recent Addition To</h1>
+                        <h1>Your Shortlist</h1>
+                        <button>SHOP NOW</button>
+                    </div>
+                </div>
+                </div>
+                <div class="right">
+                    <div class="images">
+                        <div class="image-container">
+                            <img src="/images/bgpurp.png" alt="">
+                            <div class="overlay-text">
+                                <div class="product-description">
+                                    <p class="discount">Up To 79% Off</p>
+                                    <span class="product-name">Cozy Knit Cardigan Sweater</span>
+                                </div>
+                                <div class="product-price">
+                                    <p class="discount-price">$80</p>
+                                    <s>$95</s>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="image-container">
+                            <img src="/images/gripskirt.png" alt="">
+                            <div class="overlay-text">
+                                <div class="product-description">
+                                    <p class="product-delivery">Free Delivery</p>
+                                    <span class="product-name">Sophisticated Swagger Suit</span>
+                                </div>
+                                <div class="product-price">
+                                    <p class="discount-price">$80</p>
+                                    <s>$95</s>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="images">
+                        <div class="image-container">
+                            <img src="/images/blonde2.png" alt="">
+                            <div class="overlay-text">
+                                <div class="product-description">
+                                    <p class="product-delivery">Free Delivery</p>
+                                    <span class="product-name">Classic Denim Skinny Jeans</span>
+                                </div>
+                                <div class="product-price">
+                                    <p class="discount-price">$80</p>
+                                    <s>$95</s>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="image-container">
+                            <img src="/images/bgpink2.png" alt="">
+                            <div class="overlay-text">
+                                <div class="product-description">
+                                    <p class="discount">Up To 79% Off</p>
+                                    <span class="product-name">Athletic Mesh Sports Leggings</span>
+                                </div>
+                                <div class="product-price">
+                                    <p class="discount-price">$80</p>
+                                    <s>$95</s>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            <!-- SECTION THIRTEEN STARTS HERE -->
+            <div class="section_thirteen">
                 <div class="heading">
                     <h1>Sponsored</h1>
                     <p>See All ></p>
@@ -1359,6 +1472,85 @@
 
 
 
+
+            <!-- SECTION FOURTEEN STARTS HERE -->
+
+
+            <div class="section_fourteen">
+                <div class="heading">
+                    <h1>Discover The Most Trending <br> Post In Pixio.</h1>
+                    <svg viewBox="0 0 300 300" width="150" height="150" class=" rotating-circle">
+                        <defs>
+                            <path id="circlePath" d="M150,150 m-100,0 a100,100 0 1,1 200,0 a100,100 0 1,1 -200,0"/>
+                        </defs>
+                        <text font-size="30" font-weight="400" letter-spacing="7px" fill="#000">
+                            <textPath xlink:href="#circlePath" startOffset="0%">
+                                -LATEST NEWS - LATEST NEWS
+                            </textPath>
+                        </text>
+                    </svg>
+                </div>
+                <div class="content">
+                    <div class="image-container">
+                        <img src="/images/14.1.jpg" alt="">
+                        <div class="overlay-date">
+                            <p>17 MAY 2025</p>
+                        </div>
+                        <div class="overlay-text">
+                            <p>Style Diaries: A Week <br> in Fashion</p>
+                        </div>
+                    </div>
+                    <div class="image-container">
+                        <img src="/images/14.2.jpg" alt="">
+                        <div class="overlay-date">
+                            <p>28 FEB 2025</p>
+                        </div>
+                        <div class="overlay-text">
+                            <p>Chic And Unique: Personalized <br> Fashion Finds</p>
+                        </div>
+                    </div>
+                    <div class="image-container">
+                        <img src="images/14.3.jpg" alt="">
+                        <div class="overlay-date">
+                            <p>15 AUG 2025</p>
+                        </div>
+                        <div class="overlay-text">
+                            <p>Dress to Impress: <br> Everyday Style</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <!-- SECTION FIFTEEN STARTS HERE -->
+
+
+            <div class="section_fifteen">
+                <h1>Upgrade Your Style With Our <br> Top-Notch Collections</h1>
+                <button class="collection">All Collections</button>
+                <div class="animated-overlay-images">
+                    <div class="first-section">
+                        <img src="/images/banner-media.png" alt="" style="border-top-left-radius: 80px;">
+                        <img src="/images/15.1.png" alt="" style=" border-top-right-radius: 60px;">
+                        <img src="images/15.2.png" alt="" style=" border-bottom-right-radius: 50%;">
+                    </div>
+                    <div class="second-section">
+                        <img src="images/guyingreen.png" alt="" style=" border-top-left-radius: 50%; border-top-right-radius: 50%;">
+                        <img src="images/ladyinpink.png" alt="" style="border-radius: 45%;">
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
         <footer>
             <div class="contact">
                 <img src="/images/favicon.svg" alt="">
@@ -1385,21 +1577,21 @@
                 <div class="container">
                     <img src="/images/cozy knit.png" alt="">
                     <div class="text">
-                        <h2>Cozy Knit Cardigan Sweater</h2>
+                        <h2>Cozy Knit Cardigan <br> Sweater</h2>
                         <span>July 23, 2024</span>
                     </div>
                 </div>
                 <div class="container">
                     <img src="/images/swagger suit.png" alt="">
                     <div class="text">
-                        <h2>Sophisticated Sawgger Suit</h2>
+                        <h2>Sophisticated Sawgger <br> Suit</h2>
                         <span>July 23, 2024</span>
                     </div>
                 </div>
                 <div class="container">
                     <img src="/images/mesh leggings.png" alt="">
                     <div class="text">
-                        <h2>Athletic Mesh Sports Leggings</h2>
+                        <h2>Athletic Mesh Sports <br>Leggings</h2>
                         <span>July 23, 2024</span>
                     </div>
                 </div>
@@ -1449,6 +1641,7 @@
                 <!-- Content will be filled by JS -->
             </div>
             <button class="item-slide-addcart">Add to Cart</button>
+            <button class="item-slide-addwishlist">Add to Wishlist</button>
         </div>
     </div>
 
