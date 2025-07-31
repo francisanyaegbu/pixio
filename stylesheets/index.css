@@ -827,7 +827,7 @@ input[type="search"]::-ms-clear {
     font-weight: 600;
 }
 
-.shopping-cart .viewcart, .checkout {
+.shopping-cart .checkout {
     width: 100%;
     background: #000;
     border: none;
@@ -839,19 +839,7 @@ input[type="search"]::-ms-clear {
     text-align: center;
     padding: 12px 40px;
     font-family: lufga;
-}
-
-.shopping-cart .checkout {
-    margin: 20px 0;
-    background: inherit;
-    color: #000;
-    border: 1px solid #000;
-    transition: background 0.3s, color 0.3s ease-in-out;
-}
-
-.shopping-cart .checkout:hover {
-    background: #000;
-    color: #fff;
+    margin-top: 20px;
 }
 
 

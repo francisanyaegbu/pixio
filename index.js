@@ -599,7 +599,7 @@ document.addEventListener("DOMContentLoaded", function() {
 let currentItem = null;
 
     const clickableImages = document.querySelectorAll(
-        ".image-container img, .container img, .suggestion-image-item img"
+        ".image-container img"
     );
     const overlay = document.querySelector('.item-slide-overlay');
     const content = document.querySelector('.item-slide-content');
@@ -617,20 +617,12 @@ let currentItem = null;
 
             if (parent.querySelector('.product-name')) {
                 name = parent.querySelector('.product-name').textContent;
-            } else if (parent.querySelector('h1')) {
-                name = parent.querySelector('h1').textContent;
-            } else if (parent.querySelector('span')) {
-                name = parent.querySelector('span').textContent;
             }
 
             if (parent.querySelector('.discount-price')) {
                 price = parent.querySelector('.discount-price').textContent;
-            } else if (parent.querySelector('.price h1')) {
-                price = parent.querySelector('.price h1').textContent;
-            } else if (parent.querySelector('.amount')) {
-                price = parent.querySelector('.amount').textContent;
-            } else if (parent.querySelector('span')) {
-                price = parent.querySelector('span').textContent;
+            } else if (parent.querySelector('.price')) {
+                price = parent.querySelector('.price').textContent;
             }
 
             if (parent.querySelector('.discount')) {
@@ -950,39 +942,4 @@ document.addEventListener("DOMContentLoaded", function() {
     ensureCartQty();
     renderCart();
     updateSubtotal();
-});
-
-
-
-// =================== API PRODUCTS FETCH AND DISPLAY ===================
-// Example: Display products from the API in a container with id="api-products"
-document.addEventListener("DOMContentLoaded", function() {
-    const productsContainer = document.getElementById("api-products");
-    if (!productsContainer) return;
-
-    fetch("https://fakestoreapi.com/products")
-        .then(res => res.json())
-        .then(products => {
-            productsContainer.innerHTML = products.map(product => `
-                <div class="api-product-card">
-                    <img src="${product.image}" alt="${product.title}" style="width:120px;height:120px;object-fit:contain;">
-                    <h3 style="font-size:1.1em;">${product.title}</h3>
-                    <p style="font-weight:600;">$${product.price}</p>
-                    <p style="font-size:0.95em;color:#666;">${product.category}</p>
-                    <button class="api-add-cart-btn" data-id="${product.id}">Add to Cart</button>
-                </div>
-            `).join("");
-        });
-});
-
-
-
-// Make the "View All Products" button open the API in a new tab
-document.addEventListener("DOMContentLoaded", function() {
-    const viewAllBtn = document.getElementById("api-products");
-    if (viewAllBtn) {
-        viewAllBtn.addEventListener("click", function() {
-            window.open("https://fakestoreapi.com/products", "_blank");
-        });
-    }
 });
