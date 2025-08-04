@@ -478,6 +478,11 @@ function renderCartItems() {
                         <span>${item.price}</span>
                     </div>
                 </div>
+                <div class="cart-item-qty">
+                    <button class="cart-item-qty-btn" data-action="decrement">-</button>
+                    <span class="cart-item-qty-value">1</span>
+                    <button class="cart-item-qty-btn" data-action="increment">+</button>
+                </div>
                 <div class="cart-item-remove">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
                         <path d="M19 6L5 20M5 6L19 20" stroke="#000" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -943,3 +948,40 @@ document.addEventListener("DOMContentLoaded", function() {
     renderCart();
     updateSubtotal();
 });
+
+
+
+// ...existing code...
+
+// Fetch images from Cloudinary API and display in section five
+document.addEventListener("DOMContentLoaded", function() {
+    const cloudName = "drpu2ycu6";
+    const folder = "Francis.Anyaegbu";
+    const apiUrl = `https://res.cloudinary.com/${cloudName}/image/list/${folder}/gallery.json`;
+
+    // Target the correct container
+    const sectionFive = document.querySelector('.section_five .images');
+    if (!sectionFive) return;
+
+    fetch(apiUrl)
+        .then(res => {
+            if (!res.ok) throw new Error("Network response was not ok");
+            return res.json();
+        })
+        .then(data => {
+            if (!data.resources || !Array.isArray(data.resources) || data.resources.length === 0) {
+                sectionFive.innerHTML = "<p style='color:red;'>No images found in Cloudinary folder.</p>";
+                return;
+            }
+            sectionFive.innerHTML = data.resources.map(img => `
+                <div class="image-container">
+                    <img src="https://res.cloudinary.com/${cloudName}/image/upload/${img.public_id}.${img.format}" alt="${img.public_id}">
+                </div>
+            `).join('');
+        })
+        .catch(() => {
+            sectionFive.innerHTML = "<p style='color:red;'>Could not load images from Cloudinary. Make sure your folder is public and contains images.</p>";
+        });
+});
+
+// ...existing code...
