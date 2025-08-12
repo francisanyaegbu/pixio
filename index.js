@@ -1,6 +1,32 @@
-function refreshPage() {
-        window.location.reload();
-}
+import Paystack from './node_modules/@paystack/inline-js/dist/inline.js';
+
+
+document.addEventListener("DOMContentLoaded", function() {
+
+const popup = new Paystack()
+
+
+    function handlePaystack() {
+        popup.newTransaction({
+            key: 'pk_test_fbfd1a87a79dcb1006c392e795ce51099d3dae62',
+            email: 'customer@email.com', // Customer's email
+            amount: document.querySelector('.sumtotal').textContent.replace(/[^0-9]/g, '') 
+        });
+    }
+
+
+    const checkoutBtn = document.querySelector('.checkout');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', function() {
+            handlePaystack();
+        });
+    }
+
+});
+
+// function refreshPage() {
+//         window.location.reload();
+// }
 
   const header = document.querySelector(".header");
   let hasAnimated = false;
@@ -934,13 +960,6 @@ function renderCart() {
 }
 
 // When adding to cart, set qty to 1 if not present
-function addToCart(item) {
-    if (typeof item.qty !== "number" || item.qty < 1) item.qty = 1;
-    cartItems.push(item);
-    saveCartToStorage();
-    renderCart();
-    updateSubtotal();
-}
 
 // On page load, ensure qty and subtotal are correct
 document.addEventListener("DOMContentLoaded", function() {
@@ -951,37 +970,36 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-// ...existing code...
 
 // Fetch images from Cloudinary API and display in section five
-document.addEventListener("DOMContentLoaded", function() {
-    const cloudName = "drpu2ycu6";
-    const folder = "Francis.Anyaegbu";
-    const apiUrl = `https://res.cloudinary.com/${cloudName}/image/list/${folder}/gallery.json`;
+// document.addEventListener("DOMContentLoaded", function() {
+//     const cloudName = "drpu2ycu6";
+//     const folder = "Francis.Anyaegbu";
+//     const apiUrl = `https://res.cloudinary.com/${cloudName}/image/list/${folder}/gallery.json`;
 
-    // Target the correct container
-    const sectionFive = document.querySelector('.section_five .images');
-    if (!sectionFive) return;
+//     // Target the correct container
+//     const sectionFive = document.querySelector('.section_five .images');
+//     if (!sectionFive) return;
 
-    fetch(apiUrl)
-        .then(res => {
-            if (!res.ok) throw new Error("Network response was not ok");
-            return res.json();
-        })
-        .then(data => {
-            if (!data.resources || !Array.isArray(data.resources) || data.resources.length === 0) {
-                sectionFive.innerHTML = "<p style='color:red;'>No images found in Cloudinary folder.</p>";
-                return;
-            }
-            sectionFive.innerHTML = data.resources.map(img => `
-                <div class="image-container">
-                    <img src="https://res.cloudinary.com/${cloudName}/image/upload/${img.public_id}.${img.format}" alt="${img.public_id}">
-                </div>
-            `).join('');
-        })
-        .catch(() => {
-            sectionFive.innerHTML = "<p style='color:red;'>Could not load images from Cloudinary. Make sure your folder is public and contains images.</p>";
-        });
-});
+//     fetch(apiUrl)
+//         .then(res => {
+//             if (!res.ok) throw new Error("Network response was not ok");
+//             return res.json();
+//         })
+//         .then(data => {
+//             if (!data.resources || !Array.isArray(data.resources) || data.resources.length === 0) {
+//                 sectionFive.innerHTML = "<p style='color:red;'>No images found in Cloudinary folder.</p>";
+//                 return;
+//             }
+//             sectionFive.innerHTML = data.resources.map(img => `
+//                 <div class="image-container">
+//                     <img src="https://res.cloudinary.com/${cloudName}/image/upload/${img.public_id}.${img.format}" alt="${img.public_id}">
+//                 </div>
+//             `).join('');
+//         })
+//         .catch(() => {
+//             sectionFive.innerHTML = "<p style='color:red;'>Could not load images from Cloudinary.</p>";
+//         });
+// });
 
-// ...existing code...
+

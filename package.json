@@ -1,0 +1,25 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "E-commerce",
+  "main": "index.js",
+  "scripts": {
+    "test": "text"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/francisanyaegbu/pixio.git"
+  },
+  "keywords": [
+    "key"
+  ],
+  "author": "me",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/francisanyaegbu/pixio/issues"
+  },
+  "homepage": "https://github.com/francisanyaegbu/pixio#readme",
+  "dependencies": {
+    "@paystack/inline-js": "^2.22.7"
+  }
+}
