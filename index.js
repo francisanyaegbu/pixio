@@ -1,32 +1,32 @@
 // import Paystack from './node_modules/@paystack/inline-js/dist/inline.js';
 
 
-// document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
 
-// const popup = new Paystack()
-
-
-//     function handlePaystack() {
-//         popup.newTransaction({
-//             key: 'pk_test_fbfd1a87a79dcb1006c392e795ce51099d3dae62',
-//             email: 'customer@email.com', // Customer's email
-//             amount: document.querySelector('.sumtotal').textContent.replace(/[^0-9]/g, '') 
-//         });
-//     }
+const popup = new Paystack()
 
 
-//     const checkoutBtn = document.querySelector('.checkout');
-//     if (checkoutBtn) {
-//         checkoutBtn.addEventListener('click', function() {
-//             handlePaystack();
-//         });
-//     }
+    function handlePaystack() {
+        popup.newTransaction({
+            key: 'pk_test_fbfd1a87a79dcb1006c392e795ce51099d3dae62',
+            email: 'customer@email.com', // Customer's email
+            amount: document.querySelector('.sumtotal').textContent.replace(/[^0-9]/g, '') 
+        });
+    }
 
-// });
 
-// function refreshPage() {
-//         window.location.reload();
-// }
+    const checkoutBtn = document.querySelector('.checkout');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', function() {
+            handlePaystack();
+        });
+    }
+
+});
+
+function refreshPage() {
+        window.location.reload();
+}
 
   const header = document.querySelector(".header");
   let hasAnimated = false;
