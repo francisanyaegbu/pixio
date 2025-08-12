@@ -1,27 +1,23 @@
-// import Paystack from './node_modules/@paystack/inline-js/dist/inline.js';
+import Paystack from './node_modules/@paystack/inline-js/dist/inline.js';
+// import Paystack from '@paystack/inline-js';
 
 
-document.addEventListener("DOMContentLoaded", function() {
-
-const popup = new Paystack()
-
-
-    function handlePaystack() {
-        popup.newTransaction({
-            key: 'pk_test_fbfd1a87a79dcb1006c392e795ce51099d3dae62',
-            email: 'customer@email.com', // Customer's email
-            amount: document.querySelector('.sumtotal').textContent.replace(/[^0-9]/g, '') 
-        });
-    }
-
-
-    const checkoutBtn = document.querySelector('.checkout');
-    if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', function() {
-            handlePaystack();
-        });
-    }
-
+document.querySelector('.checkout').addEventListener('click', function() {
+    var handler = Paystack.setup({
+        key: 'pk_test_fbfd1a87a79dcb1006c392e795ce51099d3dae62', // Replace with your public key
+        email: 'customer@example.com',          // Customer's email
+        amount: document.querySelector('.sumtotal').textContent.replace(/[^0-9]/g, ''), // Amount in naira
+        currency: 'NGN',                        // Optional: NGN, GHS, USD
+        ref: '' + Math.floor((Math.random() * 1000000000) + 1), // Unique reference
+        callback: function(response) {
+            alert('Payment successful. Transaction ref is ' + response.reference);
+            // You can make an API call here to verify the transaction
+        },
+        onClose: function() {
+            alert('Transaction was not completed.');
+        }
+    });
+    handler.openIframe();
 });
 
 function refreshPage() {
